@@ -189,7 +189,7 @@ def plotPoint(x, y):
     """
 
 
-def plotPointsFromEquation(equation):
+def plotPointsFromEquation(equation, prefix):
 
     if equation in Objects.list_of_equations:
         return
@@ -202,18 +202,37 @@ def plotPointsFromEquation(equation):
     
     if Objects.current_color < len(Settings.line_colors) - 1: Objects.current_color += 1
     else: Objects.current_color = 0
-    
-    for i in range(int(-Settings.amount_of_lines / 2), int((Settings.amount_of_lines / 2) + 1)):
 
-        points = [i, doMath(equation, i)]
+    if prefix.strip() == "y =":
+        for i in range(int(-Settings.amount_of_lines / 2), int((Settings.amount_of_lines / 2) + 1)):
 
-        if points[1] == "Unmathematical":
-            continue
+            points = [i, doMath(equation, i)]
 
-        if points[1] > Settings.amount_of_lines or points[1] < -Settings.amount_of_lines:
-            continue
-        
-        list_of_points.append(points)
+            if points[1] == "Unmathematical":
+                continue
+
+            if points[1] > Settings.amount_of_lines or points[1] < -Settings.amount_of_lines:
+                continue
+
+            list_of_points.append(points)
+
+    elif prefix.strip() == "x =":
+        for i in range(int(-Settings.amount_of_lines / 2), int((Settings.amount_of_lines / 2) + 1)):
+
+            points = [doMath(equation, None, i), i]
+
+            print(points)
+
+            if points[0] == "Unmathematical":
+                continue
+
+            if points[0] > Settings.amount_of_lines or points[0] < -Settings.amount_of_lines:
+                continue
+
+            list_of_points.append(points)
+
+    else:
+        print(prefix.strip())
 
     isFirst = True
         
@@ -222,7 +241,7 @@ def plotPointsFromEquation(equation):
         if isFirst: Objects.Sigma.penup()
         else: Objects.Sigma.pendown()
 
-        if point[1] == "Unmathematical":
+        if point[0] == "Unmathematical" or point[1] == "Unmathematical":
             continue
             
         plotPoint(point[0], point[1])

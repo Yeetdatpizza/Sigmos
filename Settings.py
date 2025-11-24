@@ -4,16 +4,16 @@ import math
 sigma_speed = 0
 
 # Color of the lines on the grid
-grid_color = "grey"
+grid_color = "gray50"
 
 # Color of the y-axis
-y_line_color = "green"
+y_line_color = "green4"
 
-# Color of the x axis
+# Color of the x-axis
 x_line_color = "red"
 
 # Random colors a line plotted can be
-line_colors = ["blue", "black", "purple", "orange", "yellow", "pink", "cyan"]
+line_colors = ["blue", "black", "purple", "orange", "red", "pink", "cyan", "magenta", "gold"]
 
 # Color of points plotted
 point_color = "black"

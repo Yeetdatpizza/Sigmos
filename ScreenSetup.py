@@ -120,7 +120,7 @@ def startScreen():
         return 67
 
 def friendlyListener():
-    Modules.plotPointsFromEquation(equation.get())
+    Modules.plotPointsFromEquation(equation.get(), value.get())
 
 """
 def sizeIncrease():
