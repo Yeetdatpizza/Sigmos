@@ -5,19 +5,21 @@ import Settings
 
 Objects.root.title("Sigmos")
 
-#Objects.root.attributes("-fullscreen", True)
+Objects.root.attributes("-fullscreen", True)
 
-Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid, Settings.length_of_grid)
+Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid,
+                                   Settings.length_of_grid)
 
 value = Objects.Alpha.StringVar(Objects.root, "y = ")
 
 equation = Objects.Alpha.StringVar(Objects.root)
 
 menu = Objects.Alpha.OptionMenu(Objects.root, value, "y = ", "x = ", "NA")
-menu.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
+menu.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
 
-field = Objects.Alpha.Entry(Objects.root, textvariable = equation)
-field.pack(side = Objects.Alpha.LEFT, padx=10, pady=10)
+field = Objects.Alpha.Entry(Objects.root, textvariable=equation)
+field.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
+
 
 def axisSetup(Sigma, length_of_grid, x_line_color, y_line_color, grid_color):
     Sigma.home()
@@ -79,8 +81,7 @@ def lineSetup(Sigma, length_of_grid):
     Sigma.pendown()
 
 
-def startScreen():
-    
+def startScreen(isReseting=True):
     if not Objects.isEnslaved:
 
         Sigma = Objects.Sigma
@@ -104,69 +105,70 @@ def startScreen():
         lineSetup(Sigma, Settings.length_of_grid)
         axisSetup(Sigma, Settings.length_of_grid, Settings.x_line_color, Settings.y_line_color, Settings.grid_color)
 
-        """
-        for maths in Objects.list_of_equations:
-            Modules.plotPointsFromEquation(maths)
-        """
-        
+        Sigma.penup()
+        Sigma.home()
+        Objects.current_position = [0, 0]
+        Sigma.pendown()
+
+        if not isReseting:
+            for maths in Objects.list_of_equations:
+                print(maths)
+                Modules.plotPointsFromEquation(maths[1], maths[0], True)
+
         Objects.isEnslaved = False
 
         Sigma.penup()
-        Objects.list_of_equations = []
+        if isReseting:
+            Objects.list_of_equations = []
         Objects.current_position = [0, 0]
         Sigma.home()
         Sigma.pendown()
-        
-        return 67
+
 
 def friendlyListener():
     Modules.plotPointsFromEquation(equation.get(), value.get())
 
-"""
-def sizeIncrease():
 
+def sizeIncrease():
     if Objects.isEnslaved:
         return
-    
+
     Settings.length_of_grid += 1
     Settings.amount_of_lines = int(math.pow(Settings.length_of_grid, 2) * 10)
     Settings.one_stud = .1 / (Settings.length_of_grid / 2)
     Settings.sigma_line_width = int(Settings.one_stud / 10)
-    
-    startScreen()
+
+    startScreen(False)
+
 
 def sizeDecrease():
-
     if Objects.isEnslaved or Settings.length_of_grid == 1:
         return
-    
+
     Settings.length_of_grid -= 1
     Settings.amount_of_lines = int(math.pow(Settings.length_of_grid, 2) * 10)
     Settings.one_stud = .1 / (Settings.length_of_grid / 2)
     Settings.sigma_line_width = int(Settings.one_stud / 10)
-    
-    startScreen()
 
-"""
+    startScreen(False)
 
-plot_button = Objects.Alpha.Button(Objects.root, text = "Plot!", command=friendlyListener)
-plot_button.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
 
-clear_button = Objects.Alpha.Button(Objects.root, text = "Clear!", command=startScreen)
-clear_button.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
+plot_button = Objects.Alpha.Button(Objects.root, text="Plot!", command=friendlyListener)
+plot_button.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
 
-"""
+clear_button = Objects.Alpha.Button(Objects.root, text="Clear!", command=startScreen)
+clear_button.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
 
-size_increase_button = Objects.Alpha.Button(Objects.root, text = "Increase Size!", command=sizeIncrease)
-size_increase_button.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
+size_increase_button = Objects.Alpha.Button(Objects.root, text="Increase Size!", command=sizeIncrease)
+size_increase_button.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
 
-size_decrease_button = Objects.Alpha.Button(Objects.root, text = "Decrease Size!", command=sizeDecrease)
-size_decrease_button.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
+size_decrease_button = Objects.Alpha.Button(Objects.root, text="Decrease Size!", command=sizeDecrease)
+size_decrease_button.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
 
-"""
+errorText = Objects.Alpha.Label(Objects.root, text="This is where I will put your mistakes.")
+errorText.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
 
 
 def resize():
-    Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid, Settings.length_of_grid)
-
-Objects.canvas.bind("<Configure>", resize)
+    Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid,
+                                       Settings.length_of_grid)

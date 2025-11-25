@@ -13,7 +13,7 @@ y_line_color = "green4"
 x_line_color = "red"
 
 # Random colors a line plotted can be
-line_colors = ["blue", "black", "purple", "orange", "red", "pink", "cyan", "magenta", "gold"]
+line_colors = ["blue", "black", "purple", "orange", "red", "cyan", "magenta", "gold"]
 
 # Color of points plotted
 point_color = "black"
@@ -30,4 +30,4 @@ amount_of_lines = int(math.pow(length_of_grid, 2) * 10)
 
 one_stud = .1 / (length_of_grid / 2)
 
-sigma_line_width = int(one_stud / 10)
+sigma_line_width = math.ceil(int(one_stud / 5)) + 1
