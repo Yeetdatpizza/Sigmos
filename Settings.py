@@ -30,4 +30,4 @@ amount_of_lines = int(math.pow(length_of_grid, 2) * 10)
 
 one_stud = .1 / (length_of_grid / 2)
 
-sigma_line_width = math.ceil(int(one_stud / 5)) + 1
+sigma_line_width = (math.ceil(int(one_stud / 5)) + 1) * 3

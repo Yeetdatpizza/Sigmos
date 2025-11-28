@@ -4,7 +4,7 @@ import Settings
 import Objects
 
 
-def doMath(equation, x=None, y=None):
+def doMath(equation, x = None, y = None):
     equation = equation.replace(" ", "")
     equation = equation.replace("exp", "math.exp")
     equation = equation.replace("log10", "math.log10")
@@ -91,6 +91,9 @@ def doMath(equation, x=None, y=None):
 
 
     except Exception as e:
+
+        Objects.errorText.config(text=str(e))
+
         if Settings.debug_mode:
             print("Math eval error:", e)
 
@@ -190,7 +193,7 @@ def plotPoint(x, y):
     """
 
 
-def plotPointsFromEquation(equation, prefix, actuallybeSmart=False):
+def plotPointsFromEquation(equation, prefix, actuallybeSmart = False):
     if equation in Objects.list_of_equations:
         return
 
@@ -216,6 +219,8 @@ def plotPointsFromEquation(equation, prefix, actuallybeSmart=False):
 
             if points[1] == "Unmathematical":
                 continue
+
+            print(points[1])
 
             if points[1] > Settings.amount_of_lines or points[1] < -Settings.amount_of_lines:
                 continue

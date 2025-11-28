@@ -15,10 +15,10 @@ value = Objects.Alpha.StringVar(Objects.root, "y = ")
 equation = Objects.Alpha.StringVar(Objects.root)
 
 menu = Objects.Alpha.OptionMenu(Objects.root, value, "y = ", "x = ", "NA")
-menu.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
+menu.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
 
 field = Objects.Alpha.Entry(Objects.root, textvariable=equation)
-field.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
+field.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
 
 
 def axisSetup(Sigma, length_of_grid, x_line_color, y_line_color, grid_color):
@@ -81,7 +81,7 @@ def lineSetup(Sigma, length_of_grid):
     Sigma.pendown()
 
 
-def startScreen(isReseting=True):
+def startScreen(isReseting = True):
     if not Objects.isEnslaved:
 
         Sigma = Objects.Sigma
@@ -153,22 +153,23 @@ def sizeDecrease():
     startScreen(False)
 
 
-plot_button = Objects.Alpha.Button(Objects.root, text="Plot!", command=friendlyListener)
-plot_button.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
+plot_button = Objects.Alpha.Button(Objects.root, text = "Plot!", command = friendlyListener)
+plot_button.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
 
-clear_button = Objects.Alpha.Button(Objects.root, text="Clear!", command=startScreen)
-clear_button.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
+clear_button = Objects.Alpha.Button(Objects.root, text = "Clear!", command = startScreen)
+clear_button.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
 
-size_increase_button = Objects.Alpha.Button(Objects.root, text="Increase Size!", command=sizeIncrease)
-size_increase_button.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
+size_increase_button = Objects.Alpha.Button(Objects.root, text = "Increase Size!", command = sizeIncrease)
+size_increase_button.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
 
-size_decrease_button = Objects.Alpha.Button(Objects.root, text="Decrease Size!", command=sizeDecrease)
-size_decrease_button.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
+size_decrease_button = Objects.Alpha.Button(Objects.root, text = "Decrease Size!", command = sizeDecrease)
+size_decrease_button.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
 
-errorText = Objects.Alpha.Label(Objects.root, text="This is where I will put your mistakes.")
-errorText.pack(side=Objects.Alpha.LEFT, padx=10, pady=10)
+errorText = Objects.Alpha.Label(Objects.root, text = "This is where I will put your mistakes.")
+errorText.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
+
+Objects.errorText = errorText
 
 
 def resize():
-    Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid,
-                                       Settings.length_of_grid)
+    Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid, Settings.length_of_grid)
