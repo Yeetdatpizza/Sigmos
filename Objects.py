@@ -1,4 +1,5 @@
 import tkinter as Alpha
+from tkinter import BOTTOM
 from turtle import TurtleScreen, RawTurtle
 
 root = Alpha.Tk()
@@ -16,7 +17,7 @@ Sigma = RawTurtle(screen)
 # Track current drawing color index
 current_color = 0
 
-# Uhhhh
+# Bool for checking if the turtle is currently moving
 isEnslaved = False
 
 # List Of Equations

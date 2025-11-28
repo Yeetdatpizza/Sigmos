@@ -1,5 +1,4 @@
 import math
-from re import error
 import Settings
 import Objects
 
@@ -261,8 +260,8 @@ def plotPointsFromEquation(equation, prefix, actuallybeSmart = False):
 
         isFirst = False
 
-    Objects.Sigma.pensize(Settings.sigma_line_width)
-    Objects.Sigma.width(Settings.sigma_line_width)
+    Objects.Sigma.pensize(1)
+    Objects.Sigma.width(1)
 
 
 def sigmasigmatuff(x):
