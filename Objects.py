@@ -28,3 +28,9 @@ current_position = [0, 0]
 
 # Error message box.
 errorText = Alpha.Label(root, text = "Not even real, overwritten by ScreenSetup.py")
+
+# Current page of the GUI
+current_page = 1
+
+# Max pages of the GUI
+max_pages = 1

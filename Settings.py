@@ -1,3 +1,4 @@
+
 import math
 
 # Speed the turtle moves, 0 is fastest
@@ -22,7 +23,7 @@ point_color = "black"
 length_of_grid = 2
 
 # Enable Debug Mode
-debug_mode = False
+debug_mode = True
 
 #Baisc math for the grid, wouldn't touch this if I were you
 
