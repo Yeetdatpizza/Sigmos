@@ -2,6 +2,28 @@ import math
 import Settings
 import Objects
 
+def formatEquation(equation, i, letter, x, y):
+
+    prev_is_alnum = i > 0 and equation[i - 1].isalnum()
+    next_is_alnum = i < len(equation) - 1 and equation[i + 1].isalnum()
+
+    if prev_is_alnum and next_is_alnum:
+        equation = equation[:i] + "*(" + str(x) + ")*" + equation[i + 1:]
+        i += len("*(%s)*" % x) - 1
+
+    elif next_is_alnum:
+        equation = equation[:i] + "(" + str(x) + ")*" + equation[i + 1:]
+        i += len("(%s)*" % x) - 1
+
+    elif prev_is_alnum:
+        equation = equation[:i] + "*(" + str(x) + ")" + equation[i + 1:]
+        i += len("*(%s)" % x) - 1
+
+    else:
+        equation = equation[:i] + "(" + str(x) + ")" + equation[i + 1:]
+        i += len("(%s)" % x) - 1
+
+    return equation
 
 def doMath(equation, x = None, y = None):
     equation = equation.replace(" ", "")
@@ -31,24 +53,8 @@ def doMath(equation, x = None, y = None):
 
             if letter.lower() == "x":
 
-                prev_is_alnum = i > 0 and equation[i - 1].isalnum()
-                next_is_alnum = i < len(equation) - 1 and equation[i + 1].isalnum()
+                equation = formatEquation(equation, i, letter, x, y)
 
-                if prev_is_alnum and next_is_alnum:
-                    equation = equation[:i] + "*(" + str(x) + ")*" + equation[i + 1:]
-                    i += len("*(%s)*" % x) - 1
-
-                elif next_is_alnum:
-                    equation = equation[:i] + "(" + str(x) + ")*" + equation[i + 1:]
-                    i += len("(%s)*" % x) - 1
-
-                elif prev_is_alnum:
-                    equation = equation[:i] + "*(" + str(x) + ")" + equation[i + 1:]
-                    i += len("*(%s)" % x) - 1
-
-                else:
-                    equation = equation[:i] + "(" + str(x) + ")" + equation[i + 1:]
-                    i += len("(%s)" % x) - 1
             else:
                 i += 1
 
@@ -61,24 +67,8 @@ def doMath(equation, x = None, y = None):
             letter = equation[i]
             if letter.lower() == "y":
 
-                prev_is_alnum = i > 0 and equation[i - 1].isalnum()
-                next_is_alnum = i < len(equation) - 1 and equation[i + 1].isalnum()
+                equation = formatEquation(equation, i, letter, x, y)
 
-                if prev_is_alnum and next_is_alnum:
-                    equation = equation[:i] + "*(" + str(y) + ")*" + equation[i + 1:]
-                    i += len("*(%s)*" % y) - 1
-
-                elif next_is_alnum:
-                    equation = equation[:i] + "(" + str(y) + ")*" + equation[i + 1:]
-                    i += len("(%s)*" % y) - 1
-
-                elif prev_is_alnum:
-                    equation = equation[:i] + "*(" + str(y) + ")" + equation[i + 1:]
-                    i += len("*(%s)" % y) - 1
-
-                else:
-                    equation = equation[:i] + "(" + str(y) + ")" + equation[i + 1:]
-                    i += len("(%s)" % y) - 1
             else:
 
                 i += 1
@@ -192,11 +182,11 @@ def plotPoint(x, y):
     """
 
 
-def plotPointsFromEquation(equation, prefix, actuallybeSmart = False):
+def plotPointsFromEquation(equation, prefix, actuallyBeSmart = False):
     if equation in Objects.list_of_equations:
         return
 
-    if not actuallybeSmart:
+    if not actuallyBeSmart:
         Objects.list_of_equations.append([prefix, equation])
 
     Objects.Sigma.pensize(Settings.sigma_line_width)
@@ -262,7 +252,3 @@ def plotPointsFromEquation(equation, prefix, actuallybeSmart = False):
 
     Objects.Sigma.pensize(1)
     Objects.Sigma.width(1)
-
-
-def sigmasigmatuff(x):
-    return Settings.length_of_grid * math.sqrt(1 + math.pow(x, 2))
