@@ -7,8 +7,7 @@ Objects.root.title("Sigmos")
 
 Objects.root.attributes("-fullscreen", True)
 
-Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid,
-                                   Settings.length_of_grid)
+Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid, Settings.length_of_grid)
 
 value = Objects.Alpha.StringVar(Objects.root, "y = ")
 
@@ -17,7 +16,7 @@ equation = Objects.Alpha.StringVar(Objects.root)
 menu = Objects.Alpha.OptionMenu(Objects.root, value, "y = ", "x = ", "NA")
 menu.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
 
-field = Objects.Alpha.Entry(Objects.root, textvariable=equation)
+field = Objects.Alpha.Entry(Objects.root, textvariable = equation)
 field.pack(side = Objects.Alpha.LEFT, padx = 10, pady = 10)
 
 
