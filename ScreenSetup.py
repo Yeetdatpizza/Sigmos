@@ -180,5 +180,4 @@ showPage()
 
 
 def resize():
-    Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid,
-                                       Settings.length_of_grid)
+    Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid, Settings.length_of_grid)
