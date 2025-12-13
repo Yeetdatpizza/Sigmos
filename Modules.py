@@ -6,6 +6,7 @@ import Objects
 
 
 def formatEquation(equation, i, letter, x, y):
+
     prev_is_alnum = i > 0 and equation[i - 1].isalnum()
     next_is_alnum = i < len(equation) - 1 and equation[i + 1].isalnum()
 
@@ -53,6 +54,7 @@ def formatToPython(equation):
 
 
 def doMath(equation, x=None, y=None):
+
     equation = formatToPython(equation)
 
     if x or x == 0:
@@ -101,6 +103,7 @@ def doMath(equation, x=None, y=None):
 
 
 def doTrigeometry(equation):
+
     equation = formatToPython(equation)
 
     points = equation.split(",")
@@ -115,11 +118,13 @@ def doTrigeometry(equation):
     count = 1
 
     for i in range(len(points)):
-        points[i] = str(points[i].strip())
-        points[i] = str(points[i].replace("(", ""))
-        points[i] = str(points[i].replace(")", ""))
 
-        point_to_add.append(int(points[i]))
+        points[i] = str(points[i].strip())
+
+        points[i] = points[i].replace("[", "")
+        points[i] = points[i].replace("]", "")
+
+        point_to_add.append(eval(points[i]))
 
         if count % 2 == 0:
             new_list_of_points.append(point_to_add)
@@ -133,16 +138,14 @@ def doTrigeometry(equation):
         print("Trigeometry Points Count:", len(new_list_of_points))
 
     for point in range(len(new_list_of_points)):
-        x = eval(str(new_list_of_points[point][0]))
-        y = eval(str(new_list_of_points[point][1]))
-
-        print(x, y)
+        x = new_list_of_points[point][0]
+        y = new_list_of_points[point][1]
 
         if x == "Unmathematical" or y == "Unmathematical":
             Objects.errorText.config(text="Not how shapes work bro...")
             return
 
-        plotPoint(x, y, drag=True)
+    return new_list_of_points
 
 
 def axisSetup(Sigma, length_of_grid, x_line_color, y_line_color, grid_color):
@@ -179,13 +182,10 @@ def goToPoint(Sigma, one_stud, x, y):
     Sigma.pendown()
 
 
-def plotPoint(x, y, drag=False):
+def plotPoint(x, y):
     Sigma = Objects.Sigma
 
     currentX, currentY = Objects.current_position
-
-    if drag:
-        Sigma.pendown()
 
     x = float(x)
     y = float(y)
@@ -239,14 +239,8 @@ def plotPoint(x, y, drag=False):
 
     """
 
-    if drag:
-        Sigma.penup()
-
 
 def plotPointsFromEquation(equation, prefix, actuallyBeSmart=False):
-    if prefix.strip() == "Shape":
-        doTrigeometry(equation)
-        return
 
     if equation in Objects.list_of_equations:
         return
@@ -277,7 +271,8 @@ def plotPointsFromEquation(equation, prefix, actuallyBeSmart=False):
 
             print(points[1])
 
-            if points[1] > Settings.amount_of_lines or points[1] < -Settings.amount_of_lines:
+            if points[1] > Settings.amount_of_lines or points[
+                    1] < -Settings.amount_of_lines:
                 continue
 
             list_of_points.append(points)
@@ -294,10 +289,15 @@ def plotPointsFromEquation(equation, prefix, actuallyBeSmart=False):
                 continue
 
             if points[0] > Settings.amount_of_lines or points[
-                0] < -Settings.amount_of_lines:
+                    0] < -Settings.amount_of_lines:
                 continue
 
             list_of_points.append(points)
+
+    elif prefix.strip() == "Shape":
+        list_of_points.append(doTrigeometry(equation))
+        list_of_points = list_of_points[0]
+        list_of_points.append(list_of_points[0])
 
     else:
         print(prefix.strip())
@@ -306,10 +306,8 @@ def plotPointsFromEquation(equation, prefix, actuallyBeSmart=False):
 
     for point in list_of_points:
 
-        if isFirst:
-            Objects.Sigma.penup()
-        else:
-            Objects.Sigma.pendown()
+        if isFirst: Objects.Sigma.penup()
+        else: Objects.Sigma.pendown()
 
         if point[0] == "Unmathematical" or point[1] == "Unmathematical":
             continue

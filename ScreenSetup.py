@@ -119,7 +119,8 @@ def startScreen(isReseting=True):
 
 
 def friendlyListener():
-    Modules.plotPointsFromEquation(equation.get(), value.get())
+    for thing in equation.get().split("&"):
+        Modules.plotPointsFromEquation(str(thing), value.get())
 
 
 def sizeIncrease():
@@ -180,4 +181,4 @@ showPage()
 
 
 def resize():
-    Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid, Settings.length_of_grid)
+    Objects.screen.setworldcoordinates(-Settings.length_of_grid, -Settings.length_of_grid, Settings.length_of_grid,  Settings.length_of_grid)
