@@ -1,5 +1,5 @@
 # Sigmos
-### The best graphing calc no doubt in the whole wide world.
+### The (2nd) best graphing calc no doubt in the whole wide world.
 
 ## Purpose:
 
