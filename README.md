@@ -13,3 +13,4 @@ For now, it can do any linear equations, and MOST non-linear equations.
 The most obvious equations it is unable to solve are ones that result in non-continuous lines.
 For example, getting the tangent of x or y, results in a heart rate monitor
 instead of the weird curvy thing you would usually get.
+Oh yeah, and shapes!
